@@ -47,7 +47,7 @@ class SimetrikTest < Test::Unit::TestCase
         installments: 1,
         amount: {
           currency: 'USD',
-          vat: 19
+          vat: 190
         }
       },
       three_ds_fields: {
@@ -85,7 +85,7 @@ class SimetrikTest < Test::Unit::TestCase
           "amount": {
             "total_amount": 10.0,
             "currency": 'USD',
-            "vat": 19
+            "vat": 1.9
           }
         },
         "payment_method": {
@@ -210,7 +210,7 @@ class SimetrikTest < Test::Unit::TestCase
         "amount": {
           "total_amount": 10.0,
           "currency": 'USD',
-          "vat": 19
+          "vat": 1.9
         },
         "transaction": {
           "id": 'fdb52e6a0e794b039de097e815a982fd'
@@ -246,7 +246,7 @@ class SimetrikTest < Test::Unit::TestCase
         "amount": {
           "total_amount": 10.0,
           "currency": 'USD',
-          "vat": 19
+          "vat": 1.9
         },
         "transaction": {
           "id": 'SI-226'
@@ -262,7 +262,7 @@ class SimetrikTest < Test::Unit::TestCase
     @gateway.expects(:raw_ssl_request).with(:post, "https://payments.sta.simetrik.com/v1/#{@token_acquirer}/capture", expected_post_obj, anything).returns(FailedCaptureResponse.new())
 
     response = @gateway.capture(@amount, 'SI-226', {
-      vat: 19,
+      vat: 190,
       currency: 'USD',
       token_acquirer: @token_acquirer,
       trace_id: @trace_id
